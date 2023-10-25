@@ -26,25 +26,12 @@ router.post('/api/products', [
         const result = await db.getRepository(Product).save(product)
 
         let x = await new ProductCreatedPublisher(rabbitWrapper.channel, rabbitWrapper.queue).publish(
-            product
+            result
         )
-
-        console.log("***************************", x)
-
         res.status(201).send(result)
     } catch (error) {
         console.log(error);
     }
-
-    // const product = await productRepo
-    // await product.save();
-    // await new TicketCreatedPublisher(rabbitWrapper.client).publish({
-    //     id: product.id,
-    //     title: product.title,
-    //     price: product.price,
-    //     userId: product.userId
-    // })
-
 })
 
 

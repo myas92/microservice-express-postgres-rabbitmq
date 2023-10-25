@@ -13,4 +13,7 @@ export class Order {
 
     @Column()
     description: string
+
+    @Column()
+    product_id: number
 }
