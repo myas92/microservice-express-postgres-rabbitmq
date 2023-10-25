@@ -1,0 +1,88 @@
+version: "3.9"
+services:
+
+    product-db:
+        image: postgres
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=${PRODUCT_PG_PASSWORD}
+            - POSTGRES_USER=${PRODUCT_PG_USERNAME}
+            - POSTGRES_DB=${PRODUCT_PG_DATABASE}
+            - PGPORT=${PRODUCT_PG_PORT}
+        container_name: product-db
+        volumes:
+          - ./pgdata/product-db-data:/var/lib/postgresql/data
+
+    order-db:
+        image: postgres
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=${ORDER_PG_PASSWORD}
+            - POSTGRES_USER=${ORDER_PG_USERNAME}
+            - POSTGRES_DB=${ORDER_PG_DATABASE}
+            - PGPORT=${ORDER_PG_PORT}
+        container_name: order-db
+        volumes:
+          - ./pgdata/order-db-data:/var/lib/postgresql/data
+
+    product:
+      build: 
+        context: .
+        dockerfile: ./micro-product/Dockerfile
+      image: yaserahmadi/micro-product:latest
+      environment: 
+        - NODE_ENV=${NODE_ENV}
+        - PG_HOST=${PRODUCT_PG_HOST_DOCKER}
+        - PG_PORT=${PRODUCT_PG_PORT}
+        - PG_USERNAME=${PRODUCT_PG_USERNAME}
+        - PG_PASSWORD=${PRODUCT_PG_PASSWORD}
+        - PG_DATABASE=${PRODUCT_PG_DATABASE}
+
+        - SERVER_PORT=3000 # Server
+
+        - RABBITMQ_HOST=${RABBITMQ_HOST} # rabbitmq host
+        - RABBITMQ_PORT=${RABBITMQ_PORT} # rabbitmq port
+      ports: 
+        - "3000:3000"
+      container_name: product
+      depends_on: 
+        - product-db
+        - rabbitmq
+      volumes: 
+        - ./micro-product:/app
+        - /app/node_modules 
+
+    order:
+      build: 
+        context: .
+        dockerfile: ./micro-order/Dockerfile
+      image: yaserahmadi/micro-order:latest
+      environment: 
+        - NODE_ENV=${NODE_ENV}
+        - PG_HOST=${ORDER_PG_HOST_DOCKER}
+        - PG_PORT=${ORDER_PG_PORT}
+        - PG_USERNAME=${ORDER_PG_USERNAME}
+        - PG_PASSWORD=${ORDER_PG_PASSWORD}
+        - PG_DATABASE=${ORDER_PG_DATABASE}
+
+        - SERVER_PORT=3000 # Server
+
+        - RABBITMQ_HOST=${RABBITMQ_HOST} # rabbitmq host
+        - RABBITMQ_PORT=${RABBITMQ_PORT} # rabbitmq port
+      ports: 
+        - "3001:3000"
+      container_name: order
+      depends_on: 
+        - order-db
+        - rabbitmq
+      volumes: 
+        - ./micro-order:/app
+        - /app/node_modules 
+
+
+    rabbitmq:
+      image: rabbitmq:3.10-rc-management-alpine
+      ports:
+        - "5672:5672" # AMQP protocol port
+        - "15672:15672" # HTTP management UI
+      container_name: rabbitmq
