@@ -1,6 +1,6 @@
-import {Publisher, Subjects, OrderCreatedEvent} from '@myaszehn/common-package'
+import {Publisher, Subjects} from '@myaszehn/common-package'
 
-export class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
+export class OrderCreatedPublisher extends Publisher<any> {
     subject: Subjects.OrderCreated = Subjects.OrderCreated;
     
 }

@@ -7,4 +7,4 @@ dstart:
 dstop:
 	docker-compose down
 dbuild:
-	docker-compose build; docker-compose up;
+	docker-compose down;docker-compose build; docker-compose up;

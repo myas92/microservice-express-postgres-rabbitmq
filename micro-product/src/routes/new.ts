@@ -25,7 +25,7 @@ router.post('/api/products', [
         });
         const result = await db.getRepository(Product).save(product)
 
-        let x = await new ProductCreatedPublisher(rabbitWrapper.channel, rabbitWrapper.queue).publish(
+        let x = await new ProductCreatedPublisher(rabbitWrapper.channel, rabbitWrapper.productQueue).publish(
             result
         )
         res.status(201).send(result)

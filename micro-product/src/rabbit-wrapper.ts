@@ -1,6 +1,10 @@
 import amqp from 'amqplib'
 import { config } from 'dotenv';
 config()
+const QUEUE: any = {
+    order: 'order_queue',
+    product: 'product_queue'
+}
 class RabbitWrapper {
     private _client: any;
     private _channel: any;
@@ -17,20 +21,27 @@ class RabbitWrapper {
         }
         return this._channel;
     }
-    get queue() {
-        if (!this._queue) {
-            throw new Error('cannot access rabbitMQ queue before connecting')
+    get orderQueue() {
+        return QUEUE.order;
+    }
+    get productQueue() {
+        return QUEUE.product;
+    }
+    
+    async insertQueues() {
+        for (const key of Object.keys(QUEUE)) {
+            await this._channel.assertQueue(QUEUE[key]);
         }
-        return this._queue;
     }
 
-    async connect(host: string, port: string, queue: string) {
-        this._queue = queue;
+    async connect(host: string, port: string) {
         const amqpServer = `amqp://${host}:${port}` || 'amqp://localhost:5673';
         this._client = await amqp.connect(amqpServer);
         this._channel = await this._client.createChannel();
-        await this._channel.assertQueue(queue);
+        await this.insertQueues()
     }
+
+
 }
 
 

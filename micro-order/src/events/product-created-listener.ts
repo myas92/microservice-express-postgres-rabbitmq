@@ -1,22 +1,22 @@
 import { Subjects, Listener, ProductCreatedEvent } from '@myaszehn/common-package';
 import { queueGroupName } from './queue-group-name';
 import { db } from '../config/db';
-import { Order } from '../entity/order.entity';
+import { Product } from '../entity/product.entity';
 export class ProductCreatedListener extends Listener<ProductCreatedEvent> {
   subject: Subjects.ProductCreated = Subjects.ProductCreated;
   queueGroupName = queueGroupName;
 
   async onMessage(data: ProductCreatedEvent['data']) {
-    console.log(data)
     const { title, price, description, id } = data;
-    let order = await db.getRepository(Order).create({
+    console.log(data)
+    let product = await db.getRepository(Product).create({
+      id,
       title,
       price,
-      description,
-      product_id: id
+      description
     });
-    let result = await db.getRepository(Order).save(order)
-    console.log("Inserted new order", result.id)
+    let result = await db.getRepository(Product).save(product)
+    console.log("Inserted new product in micro-order service", result.id)
 
   }
 }

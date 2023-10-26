@@ -3,6 +3,7 @@ import { app } from './app'
 import { db } from "./config/db"
 import amqp from 'amqplib'
 import { rabbitWrapper } from './rabbit-wrapper'
+import { OrderCreatedListener } from './events/order-created-listener';
 let channel;
 const start = async () => {
   console.log("----------------------")
@@ -34,7 +35,8 @@ const start = async () => {
     process.exit();
   }
   try {
-    await rabbitWrapper.connect(process.env.RABBITMQ_HOST, process.env.RABBITMQ_PORT, 'product_channel');
+    await rabbitWrapper.connect(process.env.RABBITMQ_HOST, process.env.RABBITMQ_PORT);
+    new OrderCreatedListener(rabbitWrapper.channel, rabbitWrapper.orderQueue).listen();
   } catch (error) {
     console.error("Error connecting to RabbitMQ: ", error);
     process.exit();

@@ -86,3 +86,13 @@ services:
         - "5672:5672" # AMQP protocol port
         - "15672:15672" # HTTP management UI
       container_name: rabbitmq
+
+    pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin4_container
+      restart: always
+      ports:
+        - "8888:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: m.y.ahmadi22@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: postgres

@@ -35,8 +35,10 @@ const start = async () => {
       process.exit();
     }
     try {
-      await rabbitWrapper.connect(process.env.RABBITMQ_HOST, process.env.RABBITMQ_PORT, 'product_channel');
-      new ProductCreatedListener(rabbitWrapper.channel, rabbitWrapper.queue).listen();
+      await rabbitWrapper.connect(process.env.RABBITMQ_HOST, process.env.RABBITMQ_PORT);
+
+      // await rabbitWrapper.connect(process.env.RABBITMQ_HOST, process.env.RABBITMQ_PORT, 'order_channel');
+      new ProductCreatedListener(rabbitWrapper.channel, rabbitWrapper.productQueue).listen();
     } catch (error) {
       console.error("Error connecting to RabbitMQ: ", error)
       process.exit();
