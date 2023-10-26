@@ -1,13 +1,9 @@
-FROM node:16-alpine
+FROM node:18-alpine
 WORKDIR /app
-
 COPY package.json .
-COPY .env ./
+RUN npm install --only=prod
 COPY . ./
-
-RUN npm config set cache /tmp --global
-RUN npm install
-
 EXPOSE 3000
 
 CMD ["npm", "start"]
+

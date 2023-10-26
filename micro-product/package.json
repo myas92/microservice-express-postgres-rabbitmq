@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev src/index.ts",
-    "test": "jest --watchAll --no-cache",
-    "prestart": "npm run build",
-    "build": "tsc"
+    "test": "jest --watchAll --no-cache"
   },
   "jest": {
     "preset": "ts-jest",
@@ -20,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@myaszehn/common-package": "^1.0.1",
+    "@myaszehn/common-package": "^1.0.3",
     "@types/amqplib": "^0.10.3",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.7",

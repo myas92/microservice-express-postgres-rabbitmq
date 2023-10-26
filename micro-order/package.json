@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev src/index.ts",
-    "test": "jest --watchAll --no-cache",
-    "prestart": "npm run build",
-    "build": "tsc"
+    "test": "jest --watchAll --no-cache"
   },
   "jest": {
     "preset": "ts-jest",
