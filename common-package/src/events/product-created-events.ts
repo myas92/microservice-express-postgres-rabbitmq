@@ -6,6 +6,7 @@ export interface ProductCreatedEvent {
         id: number,
         title: string,
         price: number,
+        quantity: number,
         description: string  
     };
 }
