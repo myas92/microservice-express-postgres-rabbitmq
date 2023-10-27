@@ -7,7 +7,7 @@ interface Event {
 }
 export abstract class Listener<T extends Event> {
     abstract subject: T['subject'];
-    abstract onMessage(data: T['data']): void;
+    abstract onMessage(data: T['data'], channel:any): void;
     private channel: any;
     private queue: any;
 
@@ -18,17 +18,16 @@ export abstract class Listener<T extends Event> {
 
     async listen() {
         await this.channel.consume(this.queue, async (data: any) => {
+            const msg = Buffer.from(data!.content)
+            console.log(`Received ${msg}`)
             const parsedData = this.parseMessage(data)
-            this.onMessage(parsedData)
+            this.onMessage(parsedData, this.channel)
         })
     }
 
     parseMessage(msg: any) {
         try {
-            const data = msg!.content;
-            return typeof data === 'string'
-              ? JSON.parse(data)
-              : JSON.parse(data.toString('utf8'));
+            return Buffer.from(msg!.content)
         } catch (error) {
             console.log(error)
         }
