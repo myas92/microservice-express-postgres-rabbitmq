@@ -26,10 +26,9 @@ export abstract class Listener<T extends Event> {
     }
 
     parseMessage(msg: any) {
-        try {
-            return Buffer.from(msg!.content)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+        const data = msg!.content;
+        return typeof data === 'string'
+          ? JSON.parse(data)
+          : JSON.parse(data.toString('utf8'));
+      }
 }
