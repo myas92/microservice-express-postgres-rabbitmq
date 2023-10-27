@@ -6,6 +6,7 @@ import { json } from "body-parser";
 
 import { showProductsRouter } from './routes/show';
 import { newProductRouter } from "./routes/new";
+import { serachProductRouter } from "./routes/search";
 
 
 import { errorHandler, NotFoundError } from "@myaszehn/common-package";
@@ -16,6 +17,7 @@ app.use(json());
 
 app.use(morgan("tiny"));
 
+app.use(serachProductRouter);
 app.use(showProductsRouter);
 app.use(newProductRouter);
 

@@ -12,6 +12,9 @@ export class Product {
     @Column()
     price: number
 
+    @Column({ nullable: true })
+    quantity: number
+
     @Column()
     description: string
 
