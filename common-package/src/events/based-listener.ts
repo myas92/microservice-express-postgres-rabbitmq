@@ -7,7 +7,7 @@ interface Event {
 }
 export abstract class Listener<T extends Event> {
     abstract subject: T['subject'];
-    abstract onMessage(data: T['data'], channel:any): void;
+    abstract onMessage(data: T['data'], msg:any, channel:any): void;
     private channel: any;
     private queue: any;
 
@@ -21,7 +21,7 @@ export abstract class Listener<T extends Event> {
             const msg = Buffer.from(data!.content)
             console.log(`Received ${msg}`)
             const parsedData = this.parseMessage(data)
-            this.onMessage(parsedData, this.channel)
+            this.onMessage(parsedData, data!, this.channel)
         })
     }
 
