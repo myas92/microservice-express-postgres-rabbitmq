@@ -18,9 +18,19 @@ export abstract class Listener<T extends Event> {
 
     async listen() {
         await this.channel.consume(this.queue, async (data: any) => {
-            const msg = Buffer.from(data!.content)
-            console.log(`Received ${msg}`)
-            this.onMessage(msg)
+            const parsedData = this.parseMessage(data)
+            this.onMessage(parsedData)
         })
+    }
+
+    parseMessage(msg: any) {
+        try {
+            const data = msg!.content;
+            return typeof data === 'string'
+              ? JSON.parse(data)
+              : JSON.parse(data.toString('utf8'));
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
