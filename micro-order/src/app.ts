@@ -1,13 +1,10 @@
-import { config } from 'dotenv';
 import express from "express";
 import 'express-async-errors'
 import morgan from "morgan";
 import { json } from "body-parser";
 
-import { indexOrderRouter } from './routes/index';
+import { showOrdersRouter } from './routes/show';
 import { newOrderRouter } from "./routes/new";
-import { showOrderRouter } from './routes/show';
-import { updateOrderRouter } from './routes/update';
 
 import { errorHandler, NotFoundError } from "@myaszehn/common-package";
 
@@ -17,10 +14,8 @@ app.use(json());
 
 app.use(morgan("tiny"));
 
-app.use(indexOrderRouter);
+app.use(showOrdersRouter);
 app.use(newOrderRouter);
-app.use(showOrderRouter);
-app.use(updateOrderRouter);
 
 
 app.all('*', async () => {

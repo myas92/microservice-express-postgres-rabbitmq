@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "dc5fe369-903f-4a90-9cff-648513d484c9",
+		"name": "Zehn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"ok\",\n    \"price\": 123,\n    \"description\": \"something\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/orders",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": 43\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/orders",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "show products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/products",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/products",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

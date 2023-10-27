@@ -8,7 +8,6 @@ export class ProductCreatedListener extends Listener<ProductCreatedEvent> {
 
   async onMessage(data: ProductCreatedEvent['data']) {
     const { title, price, description, id } = data;
-    console.log(data)
     let product = await db.getRepository(Product).create({
       id,
       title,

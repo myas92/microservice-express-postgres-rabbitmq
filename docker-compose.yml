@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 services:
 
     product-db:
@@ -12,6 +12,8 @@ services:
         container_name: product-db
         volumes:
           - ./pgdata/product-db-data:/var/lib/postgresql/data
+        networks:
+          - micro
 
     order-db:
         image: postgres
@@ -24,6 +26,8 @@ services:
         container_name: order-db
         volumes:
           - ./pgdata/order-db-data:/var/lib/postgresql/data
+        networks:
+          - micro
 
     product:
       build: 
@@ -50,7 +54,9 @@ services:
         - rabbitmq
       volumes: 
         - ./micro-product:/app
-        - /app/node_modules 
+        - /app/node_modules
+      networks:
+        - micro
 
     order:
       build: 
@@ -78,7 +84,8 @@ services:
       volumes: 
         - ./micro-order:/app
         - /app/node_modules 
-
+      networks:
+        - micro
 
     rabbitmq:
       image: rabbitmq:3.10-rc-management-alpine
@@ -86,6 +93,8 @@ services:
         - "5672:5672" # AMQP protocol port
         - "15672:15672" # HTTP management UI
       container_name: rabbitmq
+      networks:
+        - micro
 
     pgadmin:
       image: dpage/pgadmin4
@@ -96,3 +105,9 @@ services:
       environment:
         PGADMIN_DEFAULT_EMAIL: m.y.ahmadi22@gmail.com
         PGADMIN_DEFAULT_PASSWORD: postgres
+      networks:
+        - micro
+
+networks:
+  micro:
+    name: micro

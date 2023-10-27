@@ -4,10 +4,9 @@ import 'express-async-errors'
 import morgan from "morgan";
 import { json } from "body-parser";
 
-import { indexProductRouter } from './routes/index';
+import { showProductsRouter } from './routes/show';
 import { newProductRouter } from "./routes/new";
-import { showProductRouter } from './routes/show';
-import { updateProductRouter } from './routes/update';
+
 
 import { errorHandler, NotFoundError } from "@myaszehn/common-package";
 
@@ -17,11 +16,8 @@ app.use(json());
 
 app.use(morgan("tiny"));
 
-app.use(indexProductRouter);
+app.use(showProductsRouter);
 app.use(newProductRouter);
-app.use(showProductRouter);
-app.use(updateProductRouter);
-
 
 app.all('*', async () => {
     throw new NotFoundError()

@@ -8,7 +8,6 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
 
   async onMessage(data: any) {
     let { productId } = data
-    console.log("data:   -----------", data)
     await db.getRepository(Product).delete({
       id: productId
     });

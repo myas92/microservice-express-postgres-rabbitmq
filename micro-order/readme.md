@@ -33,3 +33,8 @@ https://orkhan.gitbook.io/typeorm/docs/many-to-one-one-to-many-relations
 https://orkhan.gitbook.io/typeorm/docs/select-query-builder#joining-relations
 
 https://stackoverflow.com/questions/53141744/typeorm-basic-join-explanation
+
+https://stackoverflow.com/questions/38088279/communication-between-multiple-docker-compose-projects
+
+
+https://medium.com/@tselentispanagis/managing-microservices-and-apis-with-kong-and-konga-7d14568bb59d

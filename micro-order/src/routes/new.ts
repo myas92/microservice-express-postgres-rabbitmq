@@ -1,6 +1,6 @@
 import { OrderCreatedPublisher } from './../events/order-created-publisher';
 import express, { Request, Response } from 'express';
-import { NotFoundError, validateRequest } from '@myaszehn/common-package'
+import { BadRequestError, NotFoundError, validateRequest } from '@myaszehn/common-package'
 import { Order } from '../entity/order.entity';
 import { db } from '../config/db';
 import { Product } from '../entity/product.entity';
@@ -15,23 +15,18 @@ router.post('/api/orders', [
         gt: 0
     }).withMessage('productId is required'),
 ], validateRequest, async (req: Request, res: Response) => {
-    const { productId} = req.body;
-        let product = await db.getRepository(Product).findOneBy({
-            id: productId
-        });
+    const { productId } = req.body;
+    let product = await db.getRepository(Product).findOneBy({
+        id: productId
+    });
 
-        if(!product){
-            throw new NotFoundError();
-        }
-
-
+    if (!product) {
+        throw new NotFoundError();
+    }
     let order = new Order()
-    order.title = product.title 
-    order.price = product.price 
-
-
+    order.title = product.title
+    order.price = product.price
     const queryRunner = db.createQueryRunner();
-
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
@@ -40,14 +35,15 @@ router.post('/api/orders', [
         await queryRunner.commitTransaction();
     } catch (err) {
         await queryRunner.rollbackTransaction();
+        throw new BadRequestError('Something went wrong')
     } finally {
         await new OrderCreatedPublisher(rabbitWrapper.channel, rabbitWrapper.orderQueue).publish({
             productId
-        }
-        )
+        })
         await queryRunner.release();
     }
-        res.status(201).send(order)
+
+    res.status(201).send(order)
 })
 
 
