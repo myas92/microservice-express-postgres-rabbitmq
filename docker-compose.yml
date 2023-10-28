@@ -32,7 +32,7 @@ services:
     product:
       build: 
         context: .
-        dockerfile: ./micro-product/Dockerfile
+        dockerfile: Dockerfile.product
       image: yaserahmadi/micro-product:latest
       environment: 
         - NODE_ENV=${NODE_ENV}
@@ -61,7 +61,7 @@ services:
     order:
       build: 
         context: .
-        dockerfile: ./micro-order/Dockerfile
+        dockerfile: Dockerfile.order
       image: yaserahmadi/micro-order:latest
       environment: 
         - NODE_ENV=${NODE_ENV}
