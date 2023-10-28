@@ -140,4 +140,4 @@ method: GET, POST
 
 Import micro-service.postman_collection.json file into postman
 
-![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-10.png?raw=true)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image10.png?raw=true)
