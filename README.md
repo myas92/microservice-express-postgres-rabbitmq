@@ -132,3 +132,12 @@ method: GET, POST
 ```
 
 ![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-6.png?raw=true)
+
+
+<hr>
+
+### Postman
+
+Import micro-service.postman_collection.json file into postman
+
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-10.png?raw=true)
