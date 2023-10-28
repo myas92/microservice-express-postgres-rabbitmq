@@ -1,5 +1,5 @@
 ## Micro-service example
-![Alt text](microservice.drawio.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/micro.png?raw=true)
 
 In this project we create two services:
 
@@ -57,7 +57,7 @@ cd gateway
 docker-compose up
 ```
 
-![Alt text](image-7.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-7.png?raw=true)
 
 
 ## useful links:
@@ -72,7 +72,7 @@ password: postgres
 
 ##### Register a server
 
-![Alt text](image.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image.png?raw=true)
 
 
 <hr>
@@ -101,16 +101,16 @@ http://localhost:1337
 
 2- register the kong server
 
-![Alt text](image-2.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-2.png?raw=true)
 
 3- Add micro-product service
 
-![Alt text](image-3.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-3.png?raw=true)
 
 
 4- Add micro-order service
 
-![Alt text](image-4.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-4.png?raw=true)
 
 
 5- Add routes to each services
@@ -122,7 +122,7 @@ method: GET, POST
 ```
 Note: Press Enter key to insert new method or paths
 
-![Alt text](image-5.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-5.png?raw=true)
 
 
 ##### order
@@ -131,4 +131,4 @@ path: /api/products
 method: GET, POST
 ```
 
-![Alt text](image-6.png)
+![Alt text](https://github.com/myas92/microservice-express-postgres-rabbitmq/blob/master/docs/image-6.png?raw=true)
