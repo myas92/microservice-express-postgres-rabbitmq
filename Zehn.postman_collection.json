@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "dc5fe369-903f-4a90-9cff-648513d484c9",
-		"name": "Zehn",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "88b5be53-afc6-4393-b776-ad12671e1a76",
+		"name": "Zehn Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "603614"
 	},
 	"item": [
 		{
@@ -14,11 +15,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}:{{port}}/api/products",
+							"raw": "localhost:3000/api/products",
 							"host": [
-								"{{host}}"
+								"localhost"
 							],
-							"port": "{{port}}",
+							"port": "3000",
 							"path": [
 								"api",
 								"products"
@@ -34,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"ok\",\n    \"price\": 123,\n    \"description\": \"something\"\n}",
+							"raw": "{\n    \"title\": \"ok\",\n    \"price\": 123,\n    \"quantity\": 45,\n    \"description\": \"something\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -42,11 +43,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}:{{port}}/api/products",
+							"raw": "localhost:3000/api/products",
 							"host": [
-								"{{host}}"
+								"localhost"
 							],
-							"port": "{{port}}",
+							"port": "3000",
 							"path": [
 								"api",
 								"products"
@@ -94,11 +95,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}:{{port}}/api/orders",
+							"raw": "localhost:3001/api/orders",
 							"host": [
-								"{{host}}"
+								"localhost"
 							],
-							"port": "{{port}}",
+							"port": "3001",
 							"path": [
 								"api",
 								"orders"
@@ -158,7 +159,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"title\": \"TV\",\n    \"price\": 123,\n    \"quantity\": 45,\n    \"description\": \"sony\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,7 +206,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"productId\":123\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -221,6 +222,32 @@
 							"path": [
 								"api",
 								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/products/search?title=TV",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "TV"
+								}
 							]
 						}
 					},
